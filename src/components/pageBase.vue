@@ -1,7 +1,7 @@
 <template>
   <div class=" mx-auto flex flex-col min-h-screen p-4  
-  bg-light-grey
-  bg-pattern-mobile-light
+  bg-app-light-grey
+   bg-app-pattern-mobile-light
   bg-no-repeat bg-cover 
   ">
     <header class="flex flex-row ">
@@ -16,5 +16,5 @@
   </div>
 </template>
 <script setup>
-import ThemeController from './pageBase/themeController.vue'; 
+import ThemeController from './_pageBase/themeController.vue'; 
 </script>

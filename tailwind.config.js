@@ -10,17 +10,18 @@ export default {
   theme: {
     extend: {
       screens: {
-        'tablet': '768px',
-        'desktop': '1440px',
+        'app-tablet': '768px',
+        'app-desktop': '1440px',
       },
       backgroundImage: {
-        'pattern-mobile-light': "url('/src/assets/images/pattern-background-mobile-light.svg')",
+        'app-pattern-mobile-light': "url('/src/assets/images/pattern-background-mobile-light.svg')",
       },
       colors: {
-        'light-grey': colors.gray[100],
+        'app-light-grey': colors.gray[100],
+        'app-purple': colors.purple[500],
       },
       fontFamily: {
-        'Rubik': ['Rubik', 'sans-serif'],
+        'app-rubik': ['Rubik', 'sans-serif'],
       },
     },
   },

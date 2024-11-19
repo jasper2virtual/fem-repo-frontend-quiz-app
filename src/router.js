@@ -6,7 +6,7 @@ import Score from "./pages/Score.vue";
 
 const routes = [
     { path: '/', component: StartMenu , meta: { title: 'Quiz menu' }},
-    { path: '/question', component: Question , meta: { title: 'Quiz question' }},
+    { path: '/question/:subjectId', component: Question , meta: { title: 'Quiz question' }},
     { path: '/score', component: Score, meta: { title: 'Quiz completed' }},
 ];
 
