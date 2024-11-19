@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import { colors } from 'tailwindcss/defaultTheme'
-console.log(colors)
+import colors from 'tailwindcss/colors'
 import daisyui from 'daisyui'
 export default {
   content: [
@@ -18,8 +17,11 @@ export default {
         'pattern-mobile-light': "url('/src/assets/images/pattern-background-mobile-light.svg')",
       },
       colors: {
-        // 'light-grey': colors.gray[100],
-      }
+        'light-grey': colors.gray[100],
+      },
+      fontFamily: {
+        'Rubik': ['Rubik', 'sans-serif'],
+      },
     },
   },
   plugins: [daisyui],

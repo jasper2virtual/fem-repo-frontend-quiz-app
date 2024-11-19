@@ -1,5 +1,5 @@
 <template>
-    <label class="flex cursor-pointer gap-2">
+    <label class="_controller flex cursor-pointer gap-2">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20"
@@ -43,7 +43,12 @@ const toggleTheme = (event) => {
 </script>
 
 <style scoped>
-.daisy-toggle {
+._controller {
   margin-left: 10px;
+}
+._controller input {
+  /* --tglbg: theme('colors.purple.500'); */
+  --tglbg:purple;
+  @apply text-white;
 }
 </style>

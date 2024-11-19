@@ -1,23 +1,23 @@
 <template>
 
-  <div class="flex flex-col">
-    <div class="flex-1">
-      <span>Welcome to the</span>
-      <span>Frontend Quiz!</span>
-      <span>Pick a subject to get started.</span>
+  <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+      <span class="text-[calc(40rem/16)] font-light">Welcome to the</span>
+      <span class="text-[calc(40rem/16)] font-medium">Frontend Quiz!</span>
+      <span class="text-[calc(14rem/16)] italic">Pick a subject to get started.</span>
     </div>
-    <div class="flex-1 flex flex-col gap-4">
+    <div class="flex flex-col gap-4">
       <router-link to="/questions/html" class="menu-btn">
         <img src="/src/assets/images/icon-html.svg" class="bg-[#fff1e9] menu-icon" alt="HTML icon" />
         <span>HTML</span></router-link>
       <router-link to="/questions/css" class="menu-btn">
-        <img src="/src/assets/images/icon-css.svg" alt="CSS icon" />
+        <img src="/src/assets/images/icon-css.svg" class="bg-[#E0FDEF] menu-icon" alt="CSS icon" />
         <span>CSS</span></router-link>
       <router-link to="/questions/javascript" class="menu-btn">
-        <img src="/src/assets/images/icon-js.svg" alt="JavaScript icon" />
+        <img src="/src/assets/images/icon-js.svg" class="bg-[#EBF0FF] menu-icon" alt="JavaScript icon" />
         <span>JavaScript</span></router-link>
       <router-link to="/questions/accessibility" class="menu-btn">
-        <img src="/src/assets/images/icon-accessibility.svg" alt="Accessibility icon" />
+        <img src="/src/assets/images/icon-accessibility.svg" class="bg-[#F6E7FF] menu-icon" alt="Accessibility icon" />
         <span>Accessibility</span></router-link>
     </div>
   </div>
