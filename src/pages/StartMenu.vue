@@ -9,7 +9,7 @@
     <div class="flex flex-col gap-4">
 
       <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to" class="menu-btn">
-        <component :is="icon" class="menu-icon" />
+        <component :is="menuData.icon" class="menu-icon" />
         <span>{{ menuData.title }}</span>
       </router-link>
 
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { ref, computed, defineAsyncComponent } from 'vue'
 // import iconHtml from '/src/components/icon/icon-html.svg.vue'
 // import iconCss from '/src/components/icon/icon-css.svg.vue'
 // import iconJs from '/src/components/icon/icon-js.svg.vue'
@@ -27,20 +27,23 @@ import { defineAsyncComponent } from 'vue'
 import { useQuizzesData } from '/src/useData.js'
 const { getAllSubjectId, getTitle, getIcon } = useQuizzesData
 const allSubjectId = getAllSubjectId()
-const menuDataList = allSubjectId.map(subjectId => (
-  {
-    subjectId,
-    to: `/question/${subjectId}`,
-    title: getTitle(subjectId),
-    icon: defineAsyncComponent(() =>{
-      const path=`/src/components/icon/${getIcon(subjectId)}.svg.vue`
-      console.log(path)
-      return import(path)
-    })
-  }
-))
 
-console.log(menuDataList)
+const iconsImport = import.meta.glob('/src/components/icon/*.svg.vue')
+// console.log(icons.value)
+const menuDataList =
+  allSubjectId.map( (subjectId) => {
+    const icon =  iconsImport[`/src/components/icon/${getIcon(subjectId)}.svg.vue`]
+    return {
+      subjectId,
+      to: `/question/${subjectId}`,
+      title: getTitle(subjectId),
+      icon
+    }
+  }
+  )
+
+
+// console.log(menuDataList)
 
 </script>
 
