@@ -20,20 +20,15 @@
 
 <script setup>
 import { ref, computed, defineAsyncComponent } from 'vue'
-// import iconHtml from '/src/components/icon/icon-html.svg.vue'
-// import iconCss from '/src/components/icon/icon-css.svg.vue'
-// import iconJs from '/src/components/icon/icon-js.svg.vue'
-// import iconAccessibility from '/src/components/icon/icon-accessibility.svg.vue'
 import { useQuizzesData } from '/src/useData.js'
 const { getAllSubjectId, getTitle, getIcon } = useQuizzesData
 const allSubjectId = getAllSubjectId()
 
-const iconsImport = import.meta.glob('/src/components/icon/*.svg.vue')
-// console.log(icons.value)
-const menuDataList =
-  allSubjectId.map( async (subjectId) => {
-    const icon = await iconsImport[`/src/components/icon/${getIcon(subjectId)}.svg.vue`]()
-    // console.log(icon)
+const iconsImport = ref()
+iconsImport.value = import.meta.glob('/src/components/icon/*.svg.vue')
+const menuDataList = computed(() =>
+  allSubjectId.map((subjectId) => {
+    const icon = defineAsyncComponent(() => iconsImport.value[`/src/components/icon/${getIcon(subjectId)}.svg.vue`]())
     return {
       subjectId,
       to: `/question/${subjectId}`,
@@ -41,10 +36,7 @@ const menuDataList =
       icon
     }
   }
-  )
-
-
-// console.log(menuDataList)
+  ))
 
 </script>
 
