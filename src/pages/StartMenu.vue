@@ -7,36 +7,27 @@
       <span class="text-[calc(14rem/16)] italic">Pick a subject to get started.</span>
     </div>
     <div class="flex flex-col gap-4">
-
       <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to" class="menu-btn">
         <component :is="menuData.icon" class="menu-icon" />
         <span>{{ menuData.title }}</span>
       </router-link>
-
     </div>
   </div>
 
 </template>
 
-<script setup>
-import { ref, computed, defineAsyncComponent } from 'vue'
-import { useQuizzesData } from '/src/useData.js'
-const { getAllSubjectId, getTitle, getIcon } = useQuizzesData
+<script lang="ts" setup>
+import { inject } from 'vue'
+const { getAllSubjectId, getTitle, getIconComponent } = inject('useQuizzesData')
 const allSubjectId = getAllSubjectId()
-
-const iconsImport = ref()
-iconsImport.value = import.meta.glob('/src/components/icon/*.svg.vue')
-const menuDataList = computed(() =>
-  allSubjectId.map((subjectId) => {
-    const icon = defineAsyncComponent(() => iconsImport.value[`/src/components/icon/${getIcon(subjectId)}.svg.vue`]())
-    return {
-      subjectId,
-      to: `/question/${subjectId}`,
-      title: getTitle(subjectId),
-      icon
-    }
+const menuDataList = allSubjectId.map((subjectId) => {
+  return {
+    subjectId,
+    to: `/question/${subjectId}`,
+    title: getTitle(subjectId),
+    icon: getIconComponent(subjectId)
   }
-  ))
+})
 
 </script>
 

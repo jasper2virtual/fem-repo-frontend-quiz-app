@@ -17,10 +17,12 @@
 
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import { inject } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const subjectId=route.params.subjectId
-console.log(subjectId)
+const {subjectId}=route.params
+const {getQuestions}=inject('useQuizzesData')
+const questions=getQuestions(subjectId)
 
 </script>

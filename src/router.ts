@@ -5,9 +5,9 @@ import Question from "./pages/Question.vue";
 import Score from "./pages/Score.vue";
 
 const routes = [
-    { path: '/', component: StartMenu , meta: { title: 'Quiz menu' }},
-    { path: '/question/:subjectId', component: Question , meta: { title: 'Quiz question' }},
-    { path: '/score', component: Score, meta: { title: 'Quiz completed' }},
+    { name: 'startMenu', path: '/', component: StartMenu, meta: { title: 'Quiz menu' } },
+    { name: 'question', path: '/question/:subjectId', component: Question, meta: { title: 'Quiz question' } },
+    { name: 'score', path: '/score/:subjectId', component: Score, meta: { title: 'Quiz completed' } },
 ];
 
 const router = createRouter({
@@ -18,7 +18,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title || 'Default Title';
     next();
-  });
+});
 
 export default router;
 
