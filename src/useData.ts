@@ -8,7 +8,13 @@ export const useQuizzesData = {
     getTitle: (subjectId) => useQuizzesData.getQuiz(subjectId)?.title,
     getIcon: (subjectId) => useQuizzesData.getQuiz(subjectId)?.icon,
     getQuestions: (subjectId) => useQuizzesData.getQuiz(subjectId)?.questions,
-    getIconComponent:(subjectId)=>defineAsyncComponent(
-        () => iconsImport[`@src/components/icon/${useQuizzesData.getIcon(subjectId)}.svg.vue`]() as Promise<{ default: Component }>
-    )
+    getIconComponent: (subjectId) => {
+        const icon = useQuizzesData.getIcon(subjectId)
+        if (icon)
+            defineAsyncComponent(() => iconsImport[`/src/components/icon/${icon}.svg.vue`]() as Promise<Component>)
+        return null
+    }
+
+
+
 }
