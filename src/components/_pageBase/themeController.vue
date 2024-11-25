@@ -1,5 +1,5 @@
 <template>
-  <label class=" flex cursor-pointer gap-2  shadow-md rounded-md px-1">
+  <label class=" flex cursor-pointer gap-2 px-1">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5" />

@@ -7,7 +7,8 @@ export default defineConfig({
   base:'/fem-repo-frontend-quiz-app/',
   resolve: {
     alias: {
-      '@src': path.resolve(__dirname, 'src')
+      '@src': path.resolve(__dirname, 'src'),
+      '@data': path.resolve(__dirname, 'data')
     }
   }
 })

@@ -17,8 +17,9 @@
 </template>
 
 <script lang="ts" setup>
-import { inject } from 'vue'
-const { getAllSubjectId, getTitle, getIconComponent } = inject('useQuizzesData')
+import { useQuizzesData } from '@data/useData'
+const { getAllSubjectId, getTitle, getIconComponent } = useQuizzesData
+
 const allSubjectId = getAllSubjectId()
 const menuDataList = allSubjectId.map((subjectId) => {
   return {
