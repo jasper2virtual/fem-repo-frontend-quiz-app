@@ -1,5 +1,5 @@
 <template>
-    <svg class="bg-[#fff1e9]"
+    <svg class="svg"
     xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 40 40">
         <path 
         fill="#FF7E35"
@@ -7,3 +7,9 @@
     </svg>
 </template>
 
+
+<style lang="scss" scoped>
+.svg {
+    @apply bg-[#fff1e9];
+}
+</style>

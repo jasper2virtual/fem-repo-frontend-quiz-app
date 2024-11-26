@@ -1,17 +1,18 @@
 <template>
 
-  <div class="flex flex-col gap-6">
-    <div class="flex flex-col">
+  <div class="startMenu">
+    <div class="startMenu__header">
       <span class="text-[calc(40rem/16)] font-light">Welcome to the</span>
       <span class="text-[calc(40rem/16)] font-medium">Frontend Quiz!</span>
       <span class="text-[calc(14rem/16)] italic">Pick a subject to get started.</span>
     </div>
-    <div class="flex flex-col gap-4">
-      <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to" class="menu-btn">
-        <component :is="menuData.icon" class="menu-icon" />
+    <nav class="startMenu__nav">
+      <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to"
+        class="startMenu__navItem">
+        <component :is="menuData.icon" class="startMenu__navItemIcon" />
         <span>{{ menuData.title }}</span>
       </router-link>
-    </div>
+    </nav>
   </div>
 
 </template>
@@ -33,19 +34,31 @@ const menuDataList = allSubjectId.map((subjectId) => {
 </script>
 
 <style lang="scss" scoped>
-.menu-btn {
-  @apply border-2 daisy-btn flex flex-row gap-4 justify-start bg-white p-4 h-auto shadow-md;
-
-  &>.menu-icon {
-    @apply rounded-md;
-  }
+.startMenu {
+  @apply flex flex-col gap-6;
 }
 
-.menu-btn:hover {
-  @apply border-2 border-app-purple bg-white;
+.startMenu__header {
+  @apply flex flex-col;
+}
 
-  &>.menu-icon {
-    @apply bg-app-purple *:fill-white;
-  }
+.startMenu__nav {
+  @apply flex flex-col gap-4;
+}
+
+.startMenu__navItem {
+  @apply border-2 daisy-btn flex flex-row gap-4 justify-start bg-white p-4 h-auto shadow-md;
+}
+
+.startMenu__navItemIcon {
+  @apply rounded-md;
+}
+
+.startMenu__navItem:hover {
+  @apply border-2 border-app-purple bg-white;
+}
+
+.startMenu__navItem:hover>.startMenu__navItemIcon {
+  @apply bg-app-purple *:fill-white;
 }
 </style>
