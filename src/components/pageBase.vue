@@ -47,7 +47,7 @@ watchEffect(() => {
 }
 
 .page__logo {
-  @apply flex flex-row gap-4 items-center;
+  @apply flex flex-row gap-4 items-center font-medium text-app-heading-s;
 }
 
 .page__themeController {

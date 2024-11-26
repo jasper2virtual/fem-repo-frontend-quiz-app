@@ -1,9 +1,9 @@
 <template>
 
   <div class="mcq">
-    <span class="mcq__number">Question {{ curIndex + 1 }} of {{ questions.length }}</span>
+    <span class="mcq__number">Question {{ curIndex + 1 }} of {{ questions!.length }}</span>
     <p class="mcq__question">{{ curQuestion?.question }}</p>
-    <progress class="mcq__progress daisy-progress" :value="(curIndex + 1) * 100 / questions.length"
+    <progress class="mcq__progress daisy-progress" :value="(curIndex + 1) * 100 / questions!.length"
       max="100"></progress>
     <div class="mcq__options">
 
@@ -79,14 +79,27 @@ const nextQuestion = () => {
   @apply flex flex-col gap-4;
 }
 
-.mcq__number {}
+.mcq__number {
+  @apply text-app-body-s;
+}
+
+.mcq__question {
+  @apply text-app-heading-m;
+}
+
+.mcq__progress::-moz-progress-bar,
+.mcq__progress::-webkit-progress-value,
+.mcq__progress::-webkit-progress-bar
+ {
+  @apply bg-app-purple;
+}
 
 .mcq__options {
   @apply flex flex-col gap-4;
 }
 
 .mcq__optionBtn {
-  @apply flex flex-row items-center rounded-md shadow-md bg-white p-2 border-2;
+  @apply flex flex-row items-center rounded-md shadow-md bg-white p-2 border-2 text-app-heading-s;
 }
 
 .mcq__optionInput {
@@ -108,7 +121,7 @@ const nextQuestion = () => {
 
 .mcq__submit,
 .mcq__next {
-  @apply bg-app-purple text-base-100;
+  @apply bg-app-purple text-base-100 text-app-heading-s;
 }
 
 .mcq__correctIcon,
@@ -130,5 +143,9 @@ const nextQuestion = () => {
 
 .mcq__optionBtn--wrong .mcq__optionBtnLetter {
   @apply bg-app-red text-base-100;
+}
+
+.mcq__error {
+  @apply flex flex-row gap-2 justify-center items-center text-app-red text-app-body-m;
 }
 </style>

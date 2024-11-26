@@ -2,9 +2,9 @@
 
   <div class="startMenu">
     <div class="startMenu__header">
-      <span class="text-[calc(40rem/16)] font-light">Welcome to the</span>
-      <span class="text-[calc(40rem/16)] font-medium">Frontend Quiz!</span>
-      <span class="text-[calc(14rem/16)] italic">Pick a subject to get started.</span>
+      <span class=" text-app-heading-l-regular font-light">Welcome to the</span>
+      <span class=" text-app-heading-l-bold font-medium">Frontend Quiz!</span>
+      <span class=" text-app-body-s italic">Pick a subject to get started.</span>
     </div>
     <nav class="startMenu__nav">
       <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to"
@@ -47,11 +47,11 @@ const menuDataList = allSubjectId.map((subjectId) => {
 }
 
 .startMenu__navItem {
-  @apply border-2 daisy-btn flex flex-row gap-4 justify-start bg-white p-4 h-auto shadow-md;
+  @apply border-2 daisy-btn flex flex-row gap-4 justify-start bg-white p-4 h-auto shadow-md text-app-heading-s;
 }
 
 .startMenu__navItemIcon {
-  @apply rounded-md;
+  @apply rounded-md font-medium;
 }
 
 .startMenu__navItem:hover {
