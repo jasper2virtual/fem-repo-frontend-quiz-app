@@ -16,7 +16,8 @@
       "esModuleInterop": true,
       "lib": ["ES2020", "dom"],
       "skipLibCheck": true,
-      "types": ["vite/client"]
+      "types": ["vite/client"],
+      "rootDir": "./src"
     },
     "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "data/useData.ts"],
     "exclude": ["node_modules"]

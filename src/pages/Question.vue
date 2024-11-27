@@ -10,12 +10,12 @@
       <label v-for="(option, index) in curQuestion?.options" :key="index" :class="['mcq__optionBtn group',
         selectedOption === option && submited && correct && 'mcq__optionBtn--correct',
         selectedOption === option && submited && !correct && 'mcq__optionBtn--wrong',
-        !submited && 'hover:border-app-purple has-[:focus]:border-app-purple has-[:checked]:border-app-purple'
+        !submited && 'has-[:checked]:border-app-purple'
       ]">
         <input :disabled="submited" class="mcq__optionInput" type="radio" name="mcq__optionBtn" :value="option"
           v-model="selectedOption" />
         <span :class="['mcq__optionBtnLetter',
-          !submited && 'group-hover:bg-app-purple group-hover:text-base-100 group-has-[:focus]:bg-app-purple group-has-[:focus]:text-base-100 group-has-[:checked]:bg-app-purple group-has-[:checked]:text-base-100'
+          !submited && 'group-hover:bg-app-light-purple group-hover:text-app-purple group-has-[:checked]:bg-app-purple group-has-[:checked]:text-app-pure-white'
         ]">{{ String.fromCharCode(index + 65) }}</span>
         <span>{{ option }}</span>
         <img class="mcq__correctIcon" src="@src/assets/images/icon-correct.svg" />
@@ -23,8 +23,8 @@
       </label>
 
     </div>
-    <button v-if="submited" class="mcq__next daisy-btn" @click="nextQuestion">Next Question</button>
-    <button v-else class="mcq__submit daisy-btn" @click="submitAns">Submit Answer</button>
+    <button v-if="submited" class="mcq__next" @click="nextQuestion">Next Question</button>
+    <button v-else class="mcq__submit" @click="submitAns">Submit Answer</button>
     <p v-if="errorMsg" class="mcq__error"><img src="@src/assets/images/icon-error.svg" />{{ errorMsg }}</p>
 
   </div>
@@ -76,11 +76,11 @@ const nextQuestion = () => {
 
 <style lang="scss" scoped>
 .mcq {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-4 text-app-dark-navy;
 }
 
 .mcq__number {
-  @apply text-app-body-s;
+  @apply text-app-body-s text-app-grey-navy;
 }
 
 .mcq__question {
@@ -99,7 +99,7 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtn {
-  @apply flex flex-row items-center rounded-md shadow-md bg-white p-2 border-2 text-app-heading-s;
+  @apply flex flex-row items-center rounded-md shadow-md bg-app-pure-white p-2 border-2 text-app-heading-s;
 }
 
 .mcq__optionInput {
@@ -107,7 +107,7 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtnLetter {
-  @apply bg-app-light-grey p-2 aspect-square min-w-10 rounded-md text-center mr-4;
+  @apply bg-app-light-grey text-app-grey-navy p-2 aspect-square min-w-10 rounded-md mr-4 grid place-content-center;
 }
 
 .mcq__optionBtn--correct {
@@ -121,7 +121,7 @@ const nextQuestion = () => {
 
 .mcq__submit,
 .mcq__next {
-  @apply bg-app-purple text-base-100 text-app-heading-s;
+  @apply bg-app-purple text-app-pure-white text-app-heading-s p-3 app-tablet:p-8 rounded-md focus:opacity-50 hover:opacity-50;
 }
 
 .mcq__correctIcon,
