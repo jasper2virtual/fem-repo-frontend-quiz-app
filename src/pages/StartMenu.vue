@@ -7,10 +7,9 @@
       <span class=" text-app-body-s text-app-grey-navy mt-4">Pick a subject to get started.</span>
     </div>
     <nav class="startMenu__nav">
-      <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to"
-        class="startMenu__navItem">
-        <component :is="menuData.icon" class="startMenu__navItemIcon" />
-        <span>{{ menuData.title }}</span>
+      <router-link v-for="menuData in menuDataList" :key="menuData.subjectId" :to="menuData.to">
+        <subject-banner class="startMenu__navItem" :subject-id="menuData.subjectId"
+          icon-class="startMenu__navItemIcon" />
       </router-link>
     </nav>
   </div>
@@ -19,6 +18,7 @@
 
 <script lang="ts" setup>
 import { useQuizzesData } from '@data/useData'
+import SubjectBanner from '@src/components/SubjectBanner.vue'
 const { getAllSubjectId, getTitle, getIconComponent } = useQuizzesData
 
 const allSubjectId = getAllSubjectId()
@@ -36,6 +36,7 @@ const menuDataList = allSubjectId.map((subjectId) => {
 <style lang="scss" scoped>
 .startMenu {
   @apply flex flex-col gap-6 text-app-dark-navy;
+  @apply app-desktop:grid app-desktop:grid-cols-2 app-desktop:gap-x-16;
 }
 
 .startMenu__header {
@@ -47,18 +48,18 @@ const menuDataList = allSubjectId.map((subjectId) => {
 }
 
 .startMenu__navItem {
-  @apply border-2 daisy-btn flex flex-row gap-4 justify-start bg-app-pure-white p-4 h-auto shadow-md text-app-heading-s ;
+  @apply border-2 rounded-md bg-app-pure-white p-4 shadow-md;
+  @apply min-h-16;
+  @apply app-tablet:min-h-20;
+  @apply app-desktop:min-h-24;
 }
 
-.startMenu__navItemIcon {
-  @apply rounded-md font-medium;
-}
 
 .startMenu__navItem:hover {
   @apply border-2 border-app-purple bg-app-pure-white;
 }
 
-.startMenu__navItem:hover>.startMenu__navItemIcon {
+.startMenu__navItem:hover :deep(.startMenu__navItemIcon) {
   @apply bg-app-purple *:fill-app-pure-white;
 }
 </style>

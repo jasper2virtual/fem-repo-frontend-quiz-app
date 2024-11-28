@@ -1,31 +1,39 @@
 <template>
 
-  <div class="mcq">
-    <span class="mcq__number">Question {{ curIndex + 1 }} of {{ questions!.length }}</span>
-    <p class="mcq__question">{{ curQuestion?.question }}</p>
-    <progress class="mcq__progress daisy-progress" :value="(curIndex + 1) * 100 / questions!.length"
-      max="100"></progress>
-    <div class="mcq__options">
+  <div class="mcq" tabindex="0" @keyup.a="selectedOption = curQuestion?.options[0]"
+    @keyup.b="selectedOption = curQuestion?.options[1]" @keyup.c="selectedOption = curQuestion?.options[2]"
+    @keyup.d="selectedOption = curQuestion?.options[3]" @keyup.enter="submited ? nextQuestion() : submitAns()">
+    <div class="mcq__block1">
 
-      <label v-for="(option, index) in curQuestion?.options" :key="index" :class="['mcq__optionBtn group',
-        selectedOption === option && submited && correct && 'mcq__optionBtn--correct',
-        selectedOption === option && submited && !correct && 'mcq__optionBtn--wrong',
-        !submited && 'has-[:checked]:border-app-purple'
-      ]">
-        <input :disabled="submited" class="mcq__optionInput" type="radio" name="mcq__optionBtn" :value="option"
-          v-model="selectedOption" />
-        <span :class="['mcq__optionBtnLetter',
-          !submited && 'group-hover:bg-app-light-purple group-hover:text-app-purple group-has-[:checked]:bg-app-purple group-has-[:checked]:text-app-pure-white'
-        ]">{{ String.fromCharCode(index + 65) }}</span>
-        <span>{{ option }}</span>
-        <img class="mcq__correctIcon" src="@src/assets/images/icon-correct.svg" />
-        <img class="mcq__incorrectIcon" src="@src/assets/images/icon-incorrect.svg" />
-      </label>
-
+      <span class="mcq__number">Question {{ curIndex + 1 }} of {{ questions!.length }}</span>
+      <p class="mcq__question">{{ curQuestion?.question }}</p>
+      <progress class="mcq__progress daisy-progress" :value="(curIndex + 1) * 100 / questions!.length"
+        max="100"></progress>
     </div>
-    <button v-if="submited" class="mcq__next" @click="nextQuestion">Next Question</button>
-    <button v-else class="mcq__submit" @click="submitAns">Submit Answer</button>
-    <p v-if="errorMsg" class="mcq__error"><img src="@src/assets/images/icon-error.svg" />{{ errorMsg }}</p>
+    <div class="mcq__block2">
+
+      <div class="mcq__options">
+
+        <label v-for="(option, index) in curQuestion?.options" :key="index" :class="['mcq__optionBtn group',
+          selectedOption === option && submited && correct && 'mcq__optionBtn--correct',
+          selectedOption === option && submited && !correct && 'mcq__optionBtn--wrong',
+          !submited && 'has-[:checked]:border-app-purple'
+        ]">
+          <input :disabled="submited" class="mcq__optionInput" type="radio" name="mcq__optionBtn" :value="option"
+            v-model="selectedOption" />
+          <span :class="['mcq__optionBtnLetter',
+            !submited && 'group-hover:bg-app-light-purple group-hover:text-app-purple group-has-[:checked]:bg-app-purple group-has-[:checked]:text-app-pure-white'
+          ]">{{ String.fromCharCode(index + 65) }}</span>
+          <span>{{ option }}</span>
+          <img class="mcq__correctIcon" src="@src/assets/images/icon-correct.svg" />
+          <img class="mcq__incorrectIcon" src="@src/assets/images/icon-incorrect.svg" />
+        </label>
+
+      </div>
+      <button v-if="submited" class="app-submit-btn" @click="nextQuestion">Next Question</button>
+      <button v-else class="app-submit-btn" @click="submitAns">Submit Answer</button>
+      <p v-if="errorMsg" class="mcq__error"><img src="@src/assets/images/icon-error.svg" />{{ errorMsg }}</p>
+    </div>
 
   </div>
 
@@ -33,9 +41,10 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useQuizzesData } from '@data/useData'
 const route = useRoute()
+const router = useRouter()
 const subjectId = route.params.subjectId as string
 const { getQuestions } = useQuizzesData
 const questions = getQuestions(subjectId)
@@ -68,7 +77,7 @@ const nextQuestion = () => {
     correct.value = null
     errorMsg.value = null
   } else {
-    console.log('Score:', score.value)
+    router.push({ name: 'score', params: { outOf: questions.length, score: score.value, subjectId: subjectId } })
   }
 }
 
@@ -77,7 +86,13 @@ const nextQuestion = () => {
 <style lang="scss" scoped>
 .mcq {
   @apply flex flex-col gap-4 text-app-dark-navy;
+  @apply app-desktop:grid app-desktop:grid-cols-2 app-desktop:gap-x-24;
 }
+
+.mcq__block1,.mcq__block2 {
+  @apply flex flex-col gap-4;
+}
+
 
 .mcq__number {
   @apply text-app-body-s text-app-grey-navy;
@@ -87,10 +102,14 @@ const nextQuestion = () => {
   @apply text-app-heading-m;
 }
 
+.mcq__progress {
+  @apply my-4 bg-app-pure-white;
+  @apply app-desktop:mt-auto app-desktop:mb-24;
+}
+
 .mcq__progress::-moz-progress-bar,
 .mcq__progress::-webkit-progress-value,
-.mcq__progress::-webkit-progress-bar
- {
+.mcq__progress::-webkit-progress-bar {
   @apply bg-app-purple;
 }
 
@@ -100,6 +119,9 @@ const nextQuestion = () => {
 
 .mcq__optionBtn {
   @apply flex flex-row items-center rounded-md shadow-md bg-app-pure-white p-2 border-2 text-app-heading-s;
+  @apply min-h-16;
+  @apply app-tablet:min-h-20;
+  @apply app-desktop:min-h-24 app-desktop:p-4;
 }
 
 .mcq__optionInput {
@@ -116,12 +138,6 @@ const nextQuestion = () => {
 
 .mcq__optionBtn--wrong {
   @apply border-app-red;
-}
-
-
-.mcq__submit,
-.mcq__next {
-  @apply bg-app-purple text-app-pure-white text-app-heading-s p-3 app-tablet:p-8 rounded-md focus:opacity-50 hover:opacity-50;
 }
 
 .mcq__correctIcon,

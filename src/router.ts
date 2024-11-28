@@ -7,7 +7,7 @@ import Score from "./pages/Score.vue";
 const routes = [
     { name: 'startMenu', path: '/', component: StartMenu, meta: { title: 'Quiz menu' } },
     { name: 'question', path: '/question/:subjectId', component: Question, meta: { title: 'Quiz question' } },
-    { name: 'score', path: '/score/:subjectId', component: Score, meta: { title: 'Quiz completed' } },
+    { name: 'score', path: '/score/:subjectId/:score/:outOf', component: Score, meta: { title: 'Quiz completed' } },
 ];
 
 const router = createRouter({
