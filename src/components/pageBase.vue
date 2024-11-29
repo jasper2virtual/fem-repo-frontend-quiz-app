@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div :class="['page', pageBackgroundClass]">
     <header class="page__header">
       <subject-banner v-if="subjectId" :subject-id="subjectId" />
       <ThemeController class="page__themeController" />
@@ -11,21 +11,28 @@
   </div>
 </template>
 <script lang='ts' setup>
-import { computed } from 'vue'
+import { computed, inject } from 'vue'
 import SubjectBanner from './SubjectBanner.vue'
 import ThemeController from './_pageBase/themeController.vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-const subjectId = computed(()=>route.params.subjectId)
-
+const subjectId = computed(() => route.params.subjectId)
+const {isDark} = inject('theme')
+const pageBackgroundClass = computed(() => {
+  const suffix = isDark.value ? 'dark' : 'light'
+  return `bg-app-pattern-mobile-${suffix}
+  app-tablet:bg-app-pattern-tablet-${suffix}
+  app-desktop:bg-app-pattern-desktop-${suffix}`
+})
 </script>
 
 
 <style lang='scss' scoped>
 .page {
-  @apply mx-auto flex flex-col min-h-screen p-4 bg-app-light-grey bg-app-pattern-mobile-light bg-no-repeat bg-cover;
+  @apply mx-auto flex flex-col min-h-screen p-4 bg-base-200 bg-no-repeat bg-cover;
   @apply app-tablet:p-8;
   @apply app-desktop:p-16;
+
 }
 
 .page__header {

@@ -14,15 +14,15 @@
 
       <div class="mcq__options">
 
-        <label v-for="(option, index) in curQuestion?.options" :key="index" :class="['mcq__optionBtn group',
+        <label v-for="(option, index) in curQuestion?.options" :key="index" :class="['mcq__optionBtn group border-base-100',
           selectedOption === option && submited && correct && 'mcq__optionBtn--correct',
           selectedOption === option && submited && !correct && 'mcq__optionBtn--wrong',
-          !submited && 'has-[:checked]:border-app-purple'
+          !submited && 'has-[:checked]:border-primary'
         ]">
           <input :disabled="submited" class="mcq__optionInput" type="radio" name="mcq__optionBtn" :value="option"
             v-model="selectedOption" />
           <span :class="['mcq__optionBtnLetter',
-            !submited && 'group-hover:bg-app-light-purple group-hover:text-app-purple group-has-[:checked]:bg-app-purple group-has-[:checked]:text-app-pure-white'
+            !submited && 'group-hover:bg-primary/10 group-hover:text-primary group-has-[:checked]:bg-primary group-has-[:checked]:text-primary-content'
           ]">{{ String.fromCharCode(index + 65) }}</span>
           <span>{{ option }}</span>
           <img class="mcq__correctIcon" src="@src/assets/images/icon-correct.svg" />
@@ -85,7 +85,7 @@ const nextQuestion = () => {
 
 <style lang="scss" scoped>
 .mcq {
-  @apply flex flex-col gap-4 text-app-dark-navy;
+  @apply flex flex-col gap-4;
   @apply app-desktop:grid app-desktop:grid-cols-2 app-desktop:gap-x-24;
 }
 
@@ -95,7 +95,7 @@ const nextQuestion = () => {
 
 
 .mcq__number {
-  @apply text-app-body-s text-app-grey-navy;
+  @apply text-app-body-s text-neutral-content;
 }
 
 .mcq__question {
@@ -103,14 +103,14 @@ const nextQuestion = () => {
 }
 
 .mcq__progress {
-  @apply my-4 bg-app-pure-white;
+  @apply my-4 bg-base-100;
   @apply app-desktop:mt-auto app-desktop:mb-24;
 }
 
 .mcq__progress::-moz-progress-bar,
 .mcq__progress::-webkit-progress-value,
 .mcq__progress::-webkit-progress-bar {
-  @apply bg-app-purple;
+  @apply bg-primary;
 }
 
 .mcq__options {
@@ -118,7 +118,7 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtn {
-  @apply flex flex-row items-center rounded-md shadow-md bg-app-pure-white p-2 border-2 text-app-heading-s;
+  @apply flex flex-row items-center rounded-md shadow-md bg-base-100 p-2 border-2 text-app-heading-s;
   @apply min-h-16;
   @apply app-tablet:min-h-20;
   @apply app-desktop:min-h-24 app-desktop:p-4;
@@ -129,15 +129,15 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtnLetter {
-  @apply bg-app-light-grey text-app-grey-navy p-2 aspect-square min-w-10 rounded-md mr-4 grid place-content-center;
+  @apply bg-neutral text-neutral-content p-2 aspect-square min-w-10 rounded-md mr-4 grid place-content-center;
 }
 
 .mcq__optionBtn--correct {
-  @apply border-app-green;
+  @apply border-success;
 }
 
 .mcq__optionBtn--wrong {
-  @apply border-app-red;
+  @apply border-error;
 }
 
 .mcq__correctIcon,
@@ -150,7 +150,7 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtn--correct .mcq__optionBtnLetter {
-  @apply bg-app-green text-base-100;
+  @apply bg-success text-base-100;
 }
 
 .mcq__optionBtn--wrong .mcq__incorrectIcon {
@@ -158,10 +158,10 @@ const nextQuestion = () => {
 }
 
 .mcq__optionBtn--wrong .mcq__optionBtnLetter {
-  @apply bg-app-red text-base-100;
+  @apply bg-error text-base-100;
 }
 
 .mcq__error {
-  @apply flex flex-row gap-2 justify-center items-center text-app-red text-app-body-m;
+  @apply flex flex-row gap-2 justify-center items-center text-error text-app-body-m;
 }
 </style>

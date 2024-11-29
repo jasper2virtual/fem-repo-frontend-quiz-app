@@ -26,7 +26,7 @@
 
 @layer components {
     .app-submit-btn {
-        @apply bg-app-purple text-app-pure-white text-app-heading-s p-3 app-tablet:p-8 rounded-2xl grid place-content-center cursor-pointer focus:opacity-50 hover:opacity-50;
+        @apply bg-primary text-primary-content text-app-heading-s p-3 app-tablet:p-8 rounded-2xl grid place-content-center cursor-pointer focus:opacity-50 hover:opacity-50;
         @apply min-h-16;
         @apply app-tablet:min-h-20;
         @apply app-desktop:min-h-24;

@@ -5,8 +5,8 @@ import router from '@src/router'
 const app=createApp(App);
 app.use(router)
 
-const theme = ref('light')
-const isDark = computed(() => theme.value === 'dark')
+const theme = ref('app-light')
+const isDark = computed(() => theme.value === 'app-dark')
 app.provide('theme', {
     theme,
     isDark

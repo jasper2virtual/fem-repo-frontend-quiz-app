@@ -20,7 +20,7 @@ const icon = computed(() => getIconComponent(props.subjectId))
 
 <style lang="scss" scoped>
 .banner {
-    @apply flex flex-row gap-4 items-center font-medium text-app-heading-s text-app-dark-navy;
+    @apply flex flex-row gap-4 items-center font-medium text-app-heading-s;
 }
 
 .banner__icon {

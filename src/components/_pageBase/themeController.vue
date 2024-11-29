@@ -1,7 +1,7 @@
 <template>
   <label class="controller">
     <icon-sun />
-    <input type="checkbox" true-value="dark" false-value="light" v-model="currentTheme"
+    <input type="checkbox" true-value="app-dark" false-value="app-light" v-model="currentTheme"
       class="controller__checkbox daisy-toggle daisy-theme-controller" />
     <icon-moon />
   </label>
@@ -27,6 +27,6 @@ watchEffect(() => {
 }
 
 .controller__checkbox {
-  @apply text-app-pure-white [--tglbg:theme('colors.app-purple')];
+  @apply border-none text-primary-content [--tglbg:theme('colors.primary')];
 }
 </style>
